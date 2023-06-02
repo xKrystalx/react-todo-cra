@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
 import { TasksUpdateContext } from "./tasksContext";
 
-export function Task(task, update){
+export function Task({task}){
 
     const [isEditing, toggleEditMode] = useState(false);
     const [text, setText] = useState(task.value);
     const queueUpdate = useContext(TasksUpdateContext);
 
     return(
-        <div classname="task">
+        <div className="task">
             <input type="checkbox" value={task.done} className={task.done ? "task-complete" : "task-incomplete"} onChange={e => 
                 queueUpdate({
                     type:'edit',
@@ -22,7 +22,7 @@ export function Task(task, update){
                     isEditing ?
                     <input type="text" value={text} onChange={e => { setText(e.target.value) }}/> 
                     :
-                    <span className={task.done ? "done" : ""}>{task.value}</span>
+                    <span className={task.done ? "done" : ""}>{text}</span>
                 }
             </div>
             <button onClick={e => {
@@ -44,7 +44,7 @@ export function Task(task, update){
                     type: 'delete',
                     id: task.id
                 })} 
-            className="task-delete">Delete</button>
+            className="task-delete">Delete #{task.id}</button>
         </div>
     );
 }

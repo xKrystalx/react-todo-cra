@@ -1,14 +1,10 @@
 import './App.css';
-import { TasksView } from './components/tasks/tasksLayout'
+import { TasksView } from './components/tasks/tasksView'
 
 export default function App() {
   return (
     <div>
-      <TasksView initialTasks={tasks} />
+      <TasksView/>
     </div>
   );
 }
-
-const tasks = [
-  {id: 0, value: "Some random todo", done: false},
-]

@@ -1,5 +1,7 @@
-import { useContext, useState } from "react";
+import '../../styles/components/task.css'
+import { useContext, useState} from "react";
 import { TasksUpdateContext } from "./tasksContext";
+import { Button } from "../button";
 
 export function Task({task}){
 
@@ -8,8 +10,8 @@ export function Task({task}){
     const queueUpdate = useContext(TasksUpdateContext);
 
     return(
-        <div className="task">
-            <input type="checkbox" value={task.done} className={task.done ? "task-complete" : "task-incomplete"} onChange={e => 
+        <div className={`task ${task.done ? "complete" : ""}`}>
+            <input type="checkbox" value={task.done} className="checkbox" onChange={e => 
                 queueUpdate({
                     type:'edit',
                     task:{
@@ -17,34 +19,41 @@ export function Task({task}){
                         done: e.target.checked,
                     }
                 })}/>
-            <div>
+            <div className="text">
                 {
                     isEditing ?
-                    <input type="text" value={text} onChange={e => { setText(e.target.value) }}/> 
+                    <input type="text"rows={1} value={text} onChange={e => { setText(e.target.value)}}/> 
                     :
                     <span className={task.done ? "done" : ""}>{text}</span>
                 }
             </div>
-            <button onClick={e => {
-                if(isEditing){
-                    queueUpdate({
-                        type:'edit',
-                        task:{
-                            ...task,
-                            value: e.target.value,
-                        }
-                    })
-                    toggleEditMode(!isEditing);
-                }
-                else{
-                    toggleEditMode(!isEditing);
-                }
-            }} className="task-edit">{isEditing ? "Save" : "Edit"}</button>
-            <button onClick={() => queueUpdate({
-                    type: 'delete',
-                    id: task.id
-                })} 
-            className="task-delete">Delete #{task.id}</button>
+            <div className="buttons">
+                <Button className={isEditing ? 'save' : 'edit'} onButtonClick = {onEditButtonClick} value = {isEditing ? "Save" : "Edit"}/>
+                <Button onButtonClick = {onDeleteButtonClick} value = "Delete"/>
+            </div>
         </div>
     );
+
+    function onDeleteButtonClick(){
+        queueUpdate({
+            type: 'delete',
+            id: task.id
+        })
+    }
+
+    function onEditButtonClick(e){
+        if(isEditing){
+            queueUpdate({
+                type:'edit',
+                task:{
+                    ...task,
+                    value: e.target.value,
+                }
+            })
+            toggleEditMode(!isEditing);
+        }
+        else{
+            toggleEditMode(!isEditing);
+        }
+    }
 }

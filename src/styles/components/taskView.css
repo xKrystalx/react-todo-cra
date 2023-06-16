@@ -1,0 +1,7 @@
+.tasksContainer{
+    margin-top:10%;
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: .5em;
+    width: 40vw;
+}

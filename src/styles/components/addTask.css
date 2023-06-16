@@ -1,0 +1,10 @@
+.addTask{
+    display:grid;
+    grid-auto-flow: column;
+    grid-template-columns: 80% 20%;
+    margin-top: 25%;
+}
+
+.addTask > *{
+    font-size: 1.25em;
+}

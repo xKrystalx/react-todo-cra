@@ -1,0 +1,6 @@
+.app{
+    margin: auto;
+    display:grid;
+    grid-auto-flow: row;
+    justify-content: center;
+}

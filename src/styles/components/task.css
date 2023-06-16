@@ -1,0 +1,29 @@
+.task{
+    display:grid;
+    column-gap: 1em;
+    grid-auto-flow: column;
+    grid-template-columns: 5% 70% 25%;
+}
+
+.task > .buttons{
+    width: fit-content;
+    align-self:center;
+}
+
+.task > .text{
+    overflow-wrap: normal;
+}
+.task.complete > .text{
+    text-decoration: line-through;
+    color:#aaaaaa;
+}
+
+.task > .checkbox{
+    width: 1.25em;
+    height: 1.25em;
+    align-self:center;
+}
+
+.task > .text > input{
+    width: 100%;
+}

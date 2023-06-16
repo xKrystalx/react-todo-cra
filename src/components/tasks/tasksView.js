@@ -1,7 +1,9 @@
+import '../../styles/components/taskView.css';
 import { useImmerReducer } from 'use-immer';
 import { Task } from './task';
 import { TasksUpdateContext } from './tasksContext';
 import { AddTask } from './addTask';
+import { Card } from '../decorators/card';
 
 export function TasksView(){
     const [tasks, queueUpdate] = useImmerReducer(tasksReducer, initialTasks);
@@ -13,7 +15,9 @@ export function TasksView(){
             <div className = "tasksContainer">
                 {
                     tasks.map(t => (
-                        <Task task={t} key={t.id}/>
+                        <Card showOnHover={true}>
+                            <Task task={t} key={t.id}/>
+                        </Card>
                     ))
                 }
             </div>
